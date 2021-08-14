@@ -49,6 +49,11 @@ class App extends React.Component {
               return(
                 <div key={index} className="todo-wrapper">
                   <span>{todo.content}</span>
+                  <span className="todo-btns">
+                    <button className="btn edit-btn">Edit</button>
+                    <button className="btn delete-btn">x</button>
+                  </span>
+                  
                 </div>
               )
             })}

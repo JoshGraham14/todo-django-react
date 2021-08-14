@@ -11,9 +11,19 @@
 	--color-grey-700: hsl(0, 0%, 21%);
 
 	--color-blue-300: hsl(224, 78%, 87%);
+	--color-blue-400: hsl(224, 78%, 77%);
 	--color-blue-500: hsl(224, 78%, 67%);
 	--color-blue-700: hsl(224, 78%, 47%);
 	--color-blue-900: hsl(224, 78%, 27%);
+
+	--color-yellow-300: hsl(60, 100%, 88%);
+	--color-yellow-500: hsl(60, 100%, 68%);
+	--color-yellow-700: hsl(60, 100%, 38%);
+
+	--color-green-500: hsl(120, 68%, 50%);
+	--color-green-700: hsl(120, 68%, 30%);
+
+	--color-red-500: #ff0000;
 }
 
 body {
@@ -59,15 +69,22 @@ body {
 	font-size: 1.25rem;
 	padding: 0.5em 1.5em;
 	border-radius: 0.5em;
-	background: var(--color-blue-500);
+	background: none;
 }
 
-.btn:hover,
-.btn:active,
-.btn:focus {
-	background: var(--color-blue-700);
-	color: white;
+.btn:hover {
 	cursor: pointer;
+}
+
+.submit-btn {
+	background: var(--color-green-500);
+}
+
+.submit-btn:hover,
+.submit-btn:active,
+.submit-btn:focus {
+	background: var(--color-green-700);
+	color: white;
 }
 
 #list-wrapper {
@@ -75,4 +92,46 @@ body {
 	flex-direction: column;
 	gap: 1em;
 	margin-top: 2em;
+}
+
+.todo-wrapper {
+	background: var(--color-blue-400);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+	border-radius: 0.5em;
+}
+
+.todo-btns {
+	display: flex;
+	gap: 1em;
+}
+
+.edit-btn {
+	border: 0.2em solid var(--color-yellow-500);
+	color: var(--color-yellow-500);
+	font-size: 1rem;
+	padding: 0.1em 0.5em;
+}
+
+.edit-btn:hover,
+.edit-btn:active,
+.edit-btn:focus {
+	background: var(--color-yellow-500);
+	color: black;
+}
+
+.delete-btn {
+	border: 0.2em solid var(--color-red-500);
+	color: var(--color-red-500);
+	font-size: 1rem;
+	padding: 0.1em 0.5em;
+}
+
+.delete-btn:hover,
+.delete-btn:active,
+.delete-btn:focus {
+	background: var(--color-red-500);
+	color: black;
 }
