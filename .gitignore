@@ -42,6 +42,9 @@ env/
 # mypy 
 .mypy_cache/ 
 
+# React #
+node_modules
+
 # sftp configuration file 
 sftp-config.json 
 
