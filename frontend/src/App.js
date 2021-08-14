@@ -2,8 +2,39 @@ import React from 'react'
 import './App.css';
 
 class App extends React.Component {
-  render() {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      todoList: [],
+      activeItem: {
+        id: null,
+        title: '',
+        completed: false
+      },
+      editing: false,
+    }
+    this.fetchTodos = this.fetchTodos.bind(this)
+  }
+
+  componentWillMount() {
+    this.fetchTodos()
+  }
+
+  fetchTodos() {
+    console.log('Fetching...')
+
+    fetch('http://127.0.0.1:8000/api/todo-item-list/')
+    .then(response => response.json())
+    .then(data => 
+      this.setState({
+        todoList: data,
+      })
+      )
+  }
+
+  render() {
+    var todos = this.state.todoList
     return(
       <div className="container">
         <div id="todo-container">
@@ -14,7 +45,13 @@ class App extends React.Component {
             </div>
           </form>
           <div id="list-wrapper">
-
+            {todos.map(function(todo, index){
+              return(
+                <div key={index} className="todo-wrapper">
+                  <span>{todo.content}</span>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

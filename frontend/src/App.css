@@ -10,12 +10,15 @@
 	--color-grey-500: hsl(0, 0%, 41%);
 	--color-grey-700: hsl(0, 0%, 21%);
 
+	--color-blue-300: hsl(224, 78%, 87%);
 	--color-blue-500: hsl(224, 78%, 67%);
-	--color-blue-700: hsl(224, 78%, 40%);
+	--color-blue-700: hsl(224, 78%, 47%);
+	--color-blue-900: hsl(224, 78%, 27%);
 }
 
 body {
-	background: var(--color-grey-700);
+	background: var(--color-blue-900);
+	font-family: 'Poppins', sans-serif;
 }
 
 .todo-container {
@@ -29,10 +32,11 @@ body {
 	position: absolute;
 	inset: 0;
 	margin: auto;
-	background: var(--color-grey-500);
+	background: var(--color-blue-300);
 	width: 40rem;
 	height: 45rem;
 	margin-top: 5rem;
+	padding: 1.5rem;
 }
 
 .flex-wrapper {
@@ -40,7 +44,6 @@ body {
 	flex-direction: row;
 	gap: 2em;
 	justify-content: center;
-	margin: 1rem;
 }
 
 .form-control {
@@ -65,4 +68,11 @@ body {
 	background: var(--color-blue-700);
 	color: white;
 	cursor: pointer;
+}
+
+#list-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	margin-top: 2em;
 }
