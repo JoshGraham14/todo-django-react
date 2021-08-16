@@ -87,14 +87,14 @@ body {
 	color: white;
 }
 
-#list-wrapper {
+.todo-item-list {
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
 	margin-top: 2em;
 }
 
-.todo-wrapper {
+.todo-item {
 	background: var(--color-blue-400);
 	display: flex;
 	justify-content: space-between;

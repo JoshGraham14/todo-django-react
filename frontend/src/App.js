@@ -1,67 +1,77 @@
-import React from 'react'
+import React from 'react';
 import './App.css';
+import Todo from './components/Todo.js';
+import axios from 'axios';
+
+// const todoItems = [
+// 	{
+// 		id: 1,
+// 		content: 'This is a todo item',
+// 		completed: false,
+// 	},
+// 	{
+// 		id: 2,
+// 		content: 'These todo items will eventually be pulled from the backend',
+// 		completed: false,
+// 	},
+// 	{
+// 		id: 3,
+// 		content: 'This should be enough items for basic testing',
+// 		completed: false,
+// 	},
+// ];
 
 class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			todoItems: [],
+		};
+	}
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      todoList: [],
-      activeItem: {
-        id: null,
-        title: '',
-        completed: false
-      },
-      editing: false,
-    }
-    this.fetchTodos = this.fetchTodos.bind(this)
-  }
+	componentDidMount() {
+		axios.get('http://127.0.0.1:8000/api/todo-item-list/').then((response) => {
+			this.setState({
+				todoItems: response.data,
+			});
+			console.log(response.data);
+		});
+	}
 
-  componentWillMount() {
-    this.fetchTodos()
-  }
+	render() {
+		return (
+			<>
+				<h1 style={{ textAlign: 'center', color: 'white' }}>
+					Django - React: Todo List
+				</h1>
 
-  fetchTodos() {
-    console.log('Fetching...')
-
-    fetch('http://127.0.0.1:8000/api/todo-item-list/')
-    .then(response => response.json())
-    .then(data => 
-      this.setState({
-        todoList: data,
-      })
-      )
-  }
-
-  render() {
-    var todos = this.state.todoList
-    return(
-      <div className="container">
-        <div id="todo-container">
-          <form id="form-wrapper">
-            <div className="flex-wrapper">
-              <input className="form-control" id="title" type="text" name="title" placeholder="Add todo item" />
-              <input id="submit" className="btn submit-btn" type="submit" name="add"/>
-            </div>
-          </form>
-          <div id="list-wrapper">
-            {todos.map(function(todo, index){
-              return(
-                <div key={index} className="todo-wrapper">
-                  <span>{todo.content}</span>
-                  <span className="todo-btns">
-                    <button className="btn edit-btn">Edit</button>
-                    <button className="btn delete-btn">x</button>
-                  </span>
-                  
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </div>
-    )
-  }
+				<div className='container'>
+					<form id='form-wrapper'>
+						<div className='flex-wrapper'>
+							<input
+								className='form-control'
+								id='title'
+								type='text'
+								name='title'
+								placeholder='Add todo item'
+							/>
+							<input
+								id='submit'
+								className='btn submit-btn'
+								type='submit'
+								name='add'
+							/>
+						</div>
+					</form>
+					<div className='todo-item-list'>
+						{this.state.todoItems.map((item) => (
+							<Todo key={item.id} name={item.content} />
+						))}
+					</div>
+				</div>
+			</>
+		);
+	}
 }
 
 export default App;
