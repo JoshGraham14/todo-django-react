@@ -10,6 +10,8 @@ class App extends React.Component {
 		this.state = {
 			todoItems: [],
 		}
+		this.componentDidMount = this.componentDidMount.bind(this)
+		this.handleRemoveTodo = this.handleRemoveTodo.bind(this)
 	}
 
 	componentDidMount() {
@@ -19,8 +21,14 @@ class App extends React.Component {
 				this.setState({
 					todoItems: response.data,
 				})
-				console.log(response.data)
 			})
+	}
+
+	handleRemoveTodo(id) {
+		const updatedTodoItems = this.state.todoItems.filter(
+			item => item.id !== id
+		)
+		this.setState({ todoItems: updatedTodoItems })
 	}
 
 	render() {
@@ -32,13 +40,14 @@ class App extends React.Component {
 				</h1>
 
 				<div className='container'>
-					<TodoForm />
+					<TodoForm onCreate={this.componentDidMount} />
 					<div className='todo-item-list'>
 						{todoItems.map(item => (
 							<Todo
 								key={item.id}
 								content={item.content}
 								id={item.id}
+								onDelete={this.handleRemoveTodo}
 							/>
 						))}
 					</div>
