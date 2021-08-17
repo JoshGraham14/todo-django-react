@@ -1,28 +1,30 @@
-import React from 'react';
-import './App.css';
-import Todo from './components/Todo.js';
-import PostForm from './components/TodoForm.js';
-import axios from 'axios';
+import React from 'react'
+import './App.css'
+import Todo from './components/Todo.js'
+import TodoForm from './components/TodoForm.js'
+import axios from 'axios'
 
 class App extends React.Component {
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			todoItems: [],
-		};
+		}
 	}
 
 	componentDidMount() {
-		axios.get('http://127.0.0.1:8000/api/todo-item-list/').then((response) => {
-			this.setState({
-				todoItems: response.data,
-			});
-			console.log(response.data);
-		});
+		axios
+			.get('http://127.0.0.1:8000/api/todo-item-list/')
+			.then(response => {
+				this.setState({
+					todoItems: response.data,
+				})
+				console.log(response.data)
+			})
 	}
 
 	render() {
-		const { todoItems } = this.state;
+		const { todoItems } = this.state
 		return (
 			<>
 				<h1 style={{ textAlign: 'center', color: 'white' }}>
@@ -30,16 +32,20 @@ class App extends React.Component {
 				</h1>
 
 				<div className='container'>
-					<PostForm />
+					<TodoForm />
 					<div className='todo-item-list'>
-						{todoItems.map((item) => (
-							<Todo key={item.id} name={item.content} />
+						{todoItems.map(item => (
+							<Todo
+								key={item.id}
+								content={item.content}
+								id={item.id}
+							/>
 						))}
 					</div>
 				</div>
 			</>
-		);
+		)
 	}
 }
 
-export default App;
+export default App
