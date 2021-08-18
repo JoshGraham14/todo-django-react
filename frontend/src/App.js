@@ -9,19 +9,25 @@ class App extends React.Component {
 		super(props)
 		this.state = {
 			todoItems: [],
+			updateTodo: {},
+			formEdit: false,
 		}
+
+		this.todoFormElement = React.createRef()
+
 		this.componentDidMount = this.componentDidMount.bind(this)
 		this.handleRemoveTodo = this.handleRemoveTodo.bind(this)
+		this.handleUpdateTodo = this.handleUpdateTodo.bind(this)
+		this.saveUpdateTodo = this.saveUpdateTodo.bind(this)
 	}
 
 	componentDidMount() {
-		axios
-			.get('http://127.0.0.1:8000/api/todo-item-list/')
-			.then(response => {
-				this.setState({
-					todoItems: response.data,
-				})
-			})
+		let newState = this.state
+
+		axios.get('http://127.0.0.1:8000/api/todo-list/').then(response => {
+			newState.todoItems = response.data
+			this.setState(newState)
+		})
 	}
 
 	handleRemoveTodo(id) {
@@ -31,8 +37,25 @@ class App extends React.Component {
 		this.setState({ todoItems: updatedTodoItems })
 	}
 
+	handleUpdateTodo(childContent, childId) {
+		let newState = this.state
+		newState.updateTodo = { content: childContent, id: childId }
+		newState.formEdit = true
+		this.setState(newState)
+		this.todoFormElement.current.handleEdit(childContent, childId)
+	}
+
+	saveUpdateTodo(childContent, childId) {
+		let newState = this.state
+		newState.updateTodo.content = childContent
+		newState.updateTodo.id = childId
+		newState.formEdit = false
+		this.setState(newState)
+		this.componentDidMount()
+	}
+
 	render() {
-		const { todoItems } = this.state
+		const { todoItems, updateTodo, formEdit } = this.state
 		return (
 			<>
 				<h1 style={{ textAlign: 'center', color: 'white' }}>
@@ -40,7 +63,13 @@ class App extends React.Component {
 				</h1>
 
 				<div className='container'>
-					<TodoForm onCreate={this.componentDidMount} />
+					<TodoForm
+						ref={this.todoFormElement}
+						updateTodo={updateTodo}
+						formEdit={formEdit}
+						handleUpdateTodo={this.saveUpdateTodo}
+						onCreate={this.componentDidMount}
+					/>
 					<div className='todo-item-list'>
 						{todoItems.map(item => (
 							<Todo
@@ -48,6 +77,7 @@ class App extends React.Component {
 								content={item.content}
 								id={item.id}
 								onDelete={this.handleRemoveTodo}
+								onUpdate={this.handleUpdateTodo}
 							/>
 						))}
 					</div>

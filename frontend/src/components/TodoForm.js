@@ -7,9 +7,34 @@ class TodoForm extends Component {
 
 		this.state = {
 			content: '',
+			id: null,
 		}
+
+		this.handleEdit = this.handleEdit.bind(this)
+		this.makeEdit = this.makeEdit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
+	}
+
+	handleEdit = (parentContent, parentId) => {
+		this.setState({
+			content: parentContent,
+			id: parentId,
+		})
+	}
+
+	makeEdit = e => {
+		e.preventDefault()
+		const { content, id } = this.state
+		const { handleUpdateTodo } = this.props
+		axios
+			.put(`http://127.0.0.1:8000/api/todo-update/${id}/`, {
+				content: content,
+			})
+			.then(() => {
+				handleUpdateTodo(content, id)
+				this.setState({ content: '', id: 1 })
+			})
 	}
 
 	handleChange = e => {
@@ -22,7 +47,7 @@ class TodoForm extends Component {
 		e.preventDefault()
 		const { onCreate } = this.props
 		axios
-			.post('http://127.0.0.1:8000/api/todo-item-create/', this.state)
+			.post('http://127.0.0.1:8000/api/todo-create/', this.state)
 			.then(response => {
 				this.setState({ content: '' })
 				onCreate()
@@ -31,8 +56,12 @@ class TodoForm extends Component {
 
 	render() {
 		const { content } = this.state
+		const { formEdit } = this.props
 		return (
-			<form onSubmit={this.handleSubmit} id='form-wrapper'>
+			<form
+				onSubmit={formEdit ? this.makeEdit : this.handleSubmit}
+				id='form-wrapper'
+			>
 				<div className='flex-wrapper'>
 					<input
 						className='form-control'
