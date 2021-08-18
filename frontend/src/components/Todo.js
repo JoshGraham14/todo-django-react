@@ -5,6 +5,12 @@ class Todo extends Component {
 	constructor(props) {
 		super(props)
 		this.handleClickDelete = this.handleClickDelete.bind(this)
+		this.handleClickEdit = this.handleClickEdit.bind(this)
+	}
+
+	handleClickEdit = () => {
+		const { content, id, onUpdate } = this.props
+		onUpdate(content, id)
 	}
 
 	handleClickDelete = () => {
@@ -22,7 +28,12 @@ class Todo extends Component {
 			<div className='todo-item'>
 				<h3>{content}</h3>
 				<div className='todo-btns'>
-					<button className='btn edit-btn'>Edit</button>
+					<button
+						onClick={this.handleClickEdit}
+						className='btn edit-btn'
+					>
+						Edit
+					</button>
 					<button
 						onClick={this.handleClickDelete}
 						className='btn delete-btn'
