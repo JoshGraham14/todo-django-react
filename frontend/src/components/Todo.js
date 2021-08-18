@@ -4,10 +4,10 @@ import React, { Component } from 'react'
 class Todo extends Component {
 	constructor(props) {
 		super(props)
-		this.handleClick = this.handleClick.bind(this)
+		this.handleClickDelete = this.handleClickDelete.bind(this)
 	}
 
-	handleClick = () => {
+	handleClickDelete = () => {
 		const { id, onDelete } = this.props
 		axios
 			.delete(`http://127.0.0.1:8000/api/todo-delete/${id}/`)
@@ -24,7 +24,7 @@ class Todo extends Component {
 				<div className='todo-btns'>
 					<button className='btn edit-btn'>Edit</button>
 					<button
-						onClick={this.handleClick}
+						onClick={this.handleClickDelete}
 						className='btn delete-btn'
 					>
 						Delete
