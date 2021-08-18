@@ -44,7 +44,7 @@ def todo_item_create(request):
     return Response(serializer.data)
 
 
-@api_view(['POST'])
+@api_view(['PUT'])
 def todo_item_update(request, pk):
     todo_item = TodoItem.objects.get(id=pk)
     serializer = TodoItemSerializer(instance=todo_item, data=request.data)

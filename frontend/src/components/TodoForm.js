@@ -22,7 +22,7 @@ class TodoForm extends Component {
 		e.preventDefault()
 		const { onCreate } = this.props
 		axios
-			.post('http://127.0.0.1:8000/api/todo-item-create/', this.state)
+			.post('http://127.0.0.1:8000/api/todo-create/', this.state)
 			.then(response => {
 				this.setState({ content: '' })
 				onCreate()

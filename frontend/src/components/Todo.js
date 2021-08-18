@@ -10,7 +10,7 @@ class Todo extends Component {
 	handleClick = () => {
 		const { id, onDelete } = this.props
 		axios
-			.delete(`http://127.0.0.1:8000/api/todo-item-delete/${id}/`)
+			.delete(`http://127.0.0.1:8000/api/todo-delete/${id}/`)
 			.then(() => {
 				onDelete(id)
 			})

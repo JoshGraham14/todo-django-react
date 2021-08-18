@@ -15,13 +15,11 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		axios
-			.get('http://127.0.0.1:8000/api/todo-item-list/')
-			.then(response => {
-				this.setState({
-					todoItems: response.data,
-				})
+		axios.get('http://127.0.0.1:8000/api/todo-list/').then(response => {
+			this.setState({
+				todoItems: response.data,
 			})
+		})
 	}
 
 	handleRemoveTodo(id) {
