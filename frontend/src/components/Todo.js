@@ -16,7 +16,8 @@ class Todo extends Component {
 	 * Called onClick of the edit button. calls the handleUpdateTodo method
 	 * with the onUpdate prop from the App component.
 	 */
-	handleClickEdit = () => {
+	handleClickEdit = e => {
+		e.stopPropagation()
 		const { content, id, onUpdate } = this.props
 		onUpdate(content, id)
 	}
@@ -26,7 +27,8 @@ class Todo extends Component {
 	 * and calls the handleRemoveTodo method with the onDelete prop from the
 	 * App component.
 	 */
-	handleClickDelete = () => {
+	handleClickDelete = e => {
+		e.stopPropagation()
 		const { id, onDelete } = this.props
 		axios
 			.delete(`http://127.0.0.1:8000/api/todo-delete/${id}/`)
@@ -43,6 +45,7 @@ class Todo extends Component {
 	 */
 	handleComplete = e => {
 		e.preventDefault()
+		e.stopPropagation()
 		const { content, id, completed, onCompleted } = this.props
 		axios
 			.put(`http://127.0.0.1:8000/api/todo-update/${id}/`, {
