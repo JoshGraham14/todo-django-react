@@ -99,6 +99,7 @@ class TodoForm extends Component {
 						className='btn submit-btn'
 						type='submit'
 						name='add'
+						value={formEdit ? 'Update' : 'Submit'}
 					/>
 				</div>
 			</form>
