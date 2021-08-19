@@ -35,11 +35,35 @@ class Todo extends Component {
 			})
 	}
 
+	/**
+	 * Updates completed status of Todo component's state and in the database
+	 * with a PUT call to the API. Also calls the componentDidMount method
+	 * with the onCompleted prop from the App component.
+	 * @param {*} e - event when Todo component is clicked.
+	 */
+	handleComplete = e => {
+		e.preventDefault()
+		const { content, id, completed, onCompleted } = this.props
+		axios
+			.put(`http://127.0.0.1:8000/api/todo-update/${id}/`, {
+				content: content,
+				id: id,
+				completed: !completed,
+			})
+			.then(() => {
+				this.setState({ content: '', id: 1, completed: !completed })
+				onCompleted()
+			})
+	}
+
 	/** Renders the Todo component. */
 	render() {
-		const { content } = this.props
+		const { content, completed } = this.props
 		return (
-			<div className='todo-item'>
+			<div
+				onClick={this.handleComplete}
+				className={completed ? 'todo-item completed' : 'todo-item'}
+			>
 				<h3>{content}</h3>
 				<div className='todo-btns'>
 					<button

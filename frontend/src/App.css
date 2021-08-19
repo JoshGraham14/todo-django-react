@@ -103,6 +103,15 @@ body {
 	border-radius: 0.5em;
 }
 
+.todo-item:hover {
+	cursor: pointer;
+}
+
+.completed > h3 {
+	text-decoration: line-through;
+	color: var(--color-grey-500) !important;
+}
+
 .todo-btns {
 	display: flex;
 	gap: 1em;
