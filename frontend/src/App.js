@@ -5,6 +5,11 @@ import TodoForm from './components/TodoForm.js'
 import axios from 'axios'
 
 class App extends React.Component {
+	/**
+	 * Creates the root component.
+	 * @constructor
+	 * @param {*} props
+	 */
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -21,6 +26,10 @@ class App extends React.Component {
 		this.saveUpdateTodo = this.saveUpdateTodo.bind(this)
 	}
 
+	/**
+	 * Makes GET request to retrieve all items in the todo list and adds them
+	 * to the state.
+	 * */
 	componentDidMount() {
 		let newState = this.state
 
@@ -30,6 +39,12 @@ class App extends React.Component {
 		})
 	}
 
+	/**
+	 * Deletes a todo item from the database and sets the state to reflect the
+	 * change on the frontend. This method gets passed to the Todo component
+	 * as a prop and is called onClick.
+	 * @param {string} id - The id of the item being deleted.
+	 * */
 	handleRemoveTodo(id) {
 		const updatedTodoItems = this.state.todoItems.filter(
 			item => item.id !== id
@@ -37,6 +52,14 @@ class App extends React.Component {
 		this.setState({ todoItems: updatedTodoItems })
 	}
 
+	/**
+	 * This method will be called from a Todo component to transfer that
+	 * component's state. That state is then transfered to the TodoForm
+	 * comoponent by calling the handleEdit method, so that a Todo item
+	 * can be updated.
+	 * @param {string} childContent - Content of child Todo component.
+	 * @param {number} childId - Id of child Todo component.
+	 */
 	handleUpdateTodo(childContent, childId) {
 		let newState = this.state
 		newState.updateTodo = { content: childContent, id: childId }
@@ -45,6 +68,13 @@ class App extends React.Component {
 		this.todoFormElement.current.handleEdit(childContent, childId)
 	}
 
+	/**
+	 * This method is called onClick of the submit button in the TodoForm
+	 * component when an item is being updated. The state is then set with
+	 * the updated Todo component.
+	 * @param {string} childContent - Content of child Todo component.
+	 * @param {number} childId - Id of child Todo component.
+	 */
 	saveUpdateTodo(childContent, childId) {
 		let newState = this.state
 		newState.updateTodo.content = childContent
@@ -54,6 +84,7 @@ class App extends React.Component {
 		this.componentDidMount()
 	}
 
+	/** Renders the root component. */
 	render() {
 		const { todoItems, updateTodo, formEdit } = this.state
 		return (
