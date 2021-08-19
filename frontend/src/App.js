@@ -89,9 +89,7 @@ class App extends React.Component {
 		const { todoItems, updateTodo, formEdit } = this.state
 		return (
 			<>
-				<h1 style={{ textAlign: 'center', color: 'white' }}>
-					Django - React: Todo List
-				</h1>
+				<h1 className='title'>Todo List</h1>
 
 				<div className='container'>
 					<TodoForm

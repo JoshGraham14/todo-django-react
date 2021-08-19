@@ -84,24 +84,23 @@ class TodoForm extends Component {
 		return (
 			<form
 				onSubmit={formEdit ? this.makeEdit : this.handleSubmit}
-				id='form-wrapper'
+				className='form-wrapper'
 			>
-				<div className='flex-wrapper'>
-					<input
-						className='form-control'
-						type='text'
-						name='content'
-						placeholder='Add todo item'
-						value={content}
-						onChange={this.handleChange}
-					/>
-					<input
-						className='btn submit-btn'
-						type='submit'
-						name='add'
-						value={formEdit ? 'Update' : 'Submit'}
-					/>
-				</div>
+				<input
+					className='form-input'
+					type='text'
+					name='content'
+					placeholder='Add todo item'
+					value={content}
+					onChange={this.handleChange}
+					autoComplete='off'
+				/>
+				<input
+					className='btn submit-btn'
+					type='submit'
+					name='add'
+					value={formEdit ? 'Update' : 'Add'}
+				/>
 			</form>
 		)
 	}
