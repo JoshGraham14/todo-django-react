@@ -107,8 +107,10 @@ class App extends React.Component {
 								key={item.id}
 								content={item.content}
 								id={item.id}
+								completed={item.completed}
 								onDelete={this.handleRemoveTodo}
 								onUpdate={this.handleUpdateTodo}
+								onCompleted={this.componentDidMount}
 							/>
 						))}
 					</div>
