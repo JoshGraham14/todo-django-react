@@ -20,15 +20,6 @@
 		var(--color-purple-300) 0%,
 		var(--color-blue-300) 100%
 	);
-
-	--color-yellow-300: hsl(60, 100%, 88%);
-	--color-yellow-500: hsl(60, 100%, 68%);
-	--color-yellow-700: hsl(60, 100%, 38%);
-
-	--color-green-500: hsl(120, 68%, 50%);
-	--color-green-700: hsl(120, 68%, 30%);
-
-	--color-red-500: #ff0000;
 }
 
 #root {
@@ -85,27 +76,60 @@
 	display: flex;
 	flex-direction: column;
 	gap: 1.5em;
-
 	width: 100%;
 }
 
 .todo-item {
 	display: flex;
+	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	padding: 1em;
 	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 	border-radius: 0.25rem;
 	background: rgba(255, 255, 255, 0.8);
+	position: relative;
 }
 
 .todo-item:hover {
 	cursor: pointer;
 }
 
-.completed > h3 {
+/* .completed > h3 {
 	text-decoration: line-through;
 	text-decoration-thickness: 0.15em;
+	display: inline-block;
+	opacity: 0.5;
+	width: fit-content;
+} */
+
+.completed h3 {
+	/* text-decoration: line-through;
+	text-decoration-thickness: 0.15em; */
+	display: inline-block;
+	opacity: 0.5;
+	position: relative;
+}
+
+.completed h3::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: black;
+	transform-origin: left;
+	animation: strike 100ms ease-in;
+}
+
+@keyframes strike {
+	from {
+		transform: scaleX(0);
+	}
+	to {
+		transform: scaleX(1);
+	}
 }
 
 .todo-btns {
