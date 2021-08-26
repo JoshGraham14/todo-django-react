@@ -176,7 +176,6 @@
 	width: 12ch;
 }
 
-.submit-btn:hover,
-.submit-btn:focus {
+.submit-btn:hover {
 	background: var(--color-green-200);
 }

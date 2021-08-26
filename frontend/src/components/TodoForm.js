@@ -18,6 +18,13 @@ class TodoForm extends Component {
 	}
 
 	/**
+	 * Sets the focus to the input field on render.
+	 */
+	componentDidMount() {
+		this.formInput.focus()
+	}
+
+	/**
 	 * Sets the state with the props of the Todo item being edited.
 	 * @param {string} parentContent - Content of item being edited.
 	 * @param {number} parentId - Id of item being edited.
@@ -27,6 +34,7 @@ class TodoForm extends Component {
 			content: parentContent,
 			id: parentId,
 		})
+		this.formInput.focus()
 	}
 
 	/**
@@ -89,6 +97,9 @@ class TodoForm extends Component {
 				<input
 					className='form-input'
 					type='text'
+					ref={input => {
+						this.formInput = input
+					}}
 					name='content'
 					placeholder='Add todo item'
 					value={content}
