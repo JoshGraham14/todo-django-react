@@ -40,3 +40,7 @@ DEBUG=True
 16. Run `npm start` to start the frontend on port 3000
 
 The app should now be running successfully.
+
+### Here is a demonstration of the todo list
+
+<img src="./demo.gif" alt="demo of app running"/>
